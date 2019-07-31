@@ -16,7 +16,8 @@ def login():
     if user != None and user.verify_password(request.form["password"]):
         login_session['name'] = user.username
         login_session['logged_in'] = True
-        return logged_in()
+        
+        return render_template('logged.html')
     else:
         return home()
 
@@ -30,13 +31,19 @@ def signup():
     return home()
 
 
-@app.route('/logged-in')
+@app.route('/logged-in', methods = ['GET', 'POST'])
 def logged_in():
+    user_object = get_user( login_session['name'])
+    if request.method == 'POST':
+        fav_food =  request.form['Favorite Food']
+        return  render_template('logged.html', food = fav_food)
     return render_template('logged.html')
 
 
 @app.route('/logout')
 def logout():
+    login_session['name'] = None
+    login_session['logged_in'] = False
     return home()
 
 

@@ -3,4 +3,10 @@
 Hi {{session['name']}}, you are logged in.
 </h1>
 
+<form action = '/logged-in' method="POST">
+	<input type="text" name="Favorite Food" placeholder="Food">
+	<input type="submit" value="Submit">
+</form>
+
+<h1>Your fav_food is {{food}}</h1>
 <a href = "/logout"> Logout </a>
